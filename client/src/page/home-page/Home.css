@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1 {
+    @apply absolute top-20 left-20 text-black text-6xl
+}
+
+.main-container{
+    @apply flex flex-row
+}
+
