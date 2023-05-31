@@ -11,8 +11,11 @@ Feature:
 Frontend: React, MaterialUI, tailwind, socket-client, axio
 <br> Backend: Express, MongoDB, Socket.io
 
+Highlight:
 - Using Socket IO to update table realtime for every changes made by user
 - Login, Register, Deposit, Create Item use normal Http request
+- if duration is finished, data will be moved to completed bidding
+- time window duration set in minutes
 
 Login
 <img width="1440" alt="Screen Shot 2023-05-31 at 12 31 41" src="https://github.com/calvintorsaGit/jitera_asignment/assets/42115427/7be4ca0d-c38a-44cb-ae53-4fec83ac3a7b">
