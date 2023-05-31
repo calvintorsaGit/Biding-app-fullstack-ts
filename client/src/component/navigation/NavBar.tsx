@@ -19,11 +19,19 @@ export let socket: any;
 
 function ResponsiveAppBar() {
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    const [balance, setBalance] = React.useState<number>(0);
     const navigate = useNavigate();
+    const user:any = JSON.parse(localStorage.getItem("user") ?? '')
 
     useEffect(() => {
-        socket = socketIOClient('http://localhost:8000/');
+        setBalance(user.balance);
+        socket = socketIOClient('http://localhost:8000/')
+        window.addEventListener('storage', () => {
+            const user:any = JSON.parse(localStorage.getItem("user") ?? '')
+            setBalance(user.balance);
+        })
     }, []);
+
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
@@ -50,7 +58,7 @@ function ResponsiveAppBar() {
                         variant="h6"
                         noWrap
                         component="a"
-                        href="/"
+                        href="/home"
                         sx={{
                             mr: 2,
                             display: {xs: 'none', md: 'flex', flexGrow: 1},
@@ -64,7 +72,35 @@ function ResponsiveAppBar() {
                         Bidding App
                     </Typography>
 
-                    <Box sx={{alignContent: "flex-end"}}>
+                    <Box sx={{display: "flex", flexDirection: "row", alignContent: "flex-end"}}>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="a"
+                            sx={{
+                                mr: 2,
+                                display: {xs: 'none', md: 'flex', flexGrow: 1},
+                                fontWeight: 700,
+                                color: 'inherit',
+                                textDecoration: 'none',
+                            }}
+                        >
+                            {`${user.email}`}
+                        </Typography>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="a"
+                            sx={{
+                                mr: 2,
+                                display: {xs: 'none', md: 'flex', flexGrow: 1},
+                                fontWeight: 700,
+                                color: 'inherit',
+                                textDecoration: 'none',
+                            }}
+                        >
+                            {`Balance ${balance}`}
+                        </Typography>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
                                 <Avatar alt="P" src="/static/images/avatar/2.jpg"/>

@@ -6,29 +6,19 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {Button} from "@mui/material";
-import Timer from "../timer/Timer";
 
 interface propsTable {
-    data: Array<rowCellType>,
-    onClickBid: (row: rowCellType) => void
+    data: Array<rowCellType>
 }
 
 export interface rowCellType {
     name: string,
     price: number,
-    finishedDate: string
+    finishedDate: string,
+    lastBidder: string
 }
 
-export default function DataTable(props: propsTable) {
-    const _countdown = (finishedDate: string) => {
-        const finDate = new Date(finishedDate)
-        console.log(finDate.getTime())
-        console.log(Date.now())
-        const delay = (finDate.getTime() - Date.now()) / 1000;
-        return <Timer delayResend={delay.toString()}/>
-    }
-
+export default function CompletedDataTable(props: propsTable) {
     return (
         <TableContainer component={Paper}>
             <Table sx={{minWidth: 650}} aria-label="simple table">
@@ -36,8 +26,7 @@ export default function DataTable(props: propsTable) {
                     <TableRow>
                         <TableCell>Name</TableCell>
                         <TableCell align="right">Current Price</TableCell>
-                        <TableCell align="right">Duration</TableCell>
-                        <TableCell align="right">Bid</TableCell>
+                        <TableCell align="right">Winner</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -50,10 +39,7 @@ export default function DataTable(props: propsTable) {
                                 {row.name}
                             </TableCell>
                             <TableCell align="right">{row.price}</TableCell>
-                            <TableCell align="right">{_countdown(row.finishedDate)}</TableCell>
-                            <TableCell align="right">
-                                <Button variant="outlined" onClick={() => props.onClickBid(row)}>Bid</Button>
-                            </TableCell>
+                            <TableCell align="right">{row.lastBidder}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

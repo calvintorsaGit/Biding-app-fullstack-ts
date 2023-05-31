@@ -30,9 +30,9 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
 
         res.status(201).json({
             success: true, user: {
-                id: user._id,
                 email: user.email,
-                token: generateToken(user._id)
+                token: generateToken(user._id),
+                balance: user.balance
             }
         })
 

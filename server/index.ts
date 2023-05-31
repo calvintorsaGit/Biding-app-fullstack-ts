@@ -49,12 +49,11 @@ io.on("connection", socket => {
         });
     });
 
-    socket.on("putBid", order => {
+    socket.on("put_bid", itemBid => {
         ItemBid
-            .update({ _id: order._id }, { $inc: { ordQty: order.order } })
+            .updateOne({name: itemBid.name}, {$set: {price: itemBid.price, lastBidder: itemBid.email}})
             .then(updatedDoc => {
-                // Emitting event to update the Kitchen opened across the devices with the realtime order values
-                io.sockets.emit("change_data");
+                io.sockets.emit("change_data", updatedDoc);
             });
     });
 })

@@ -9,8 +9,7 @@ export interface IDeposit extends mongoose.Document {
 const DepositSchema = new mongoose.Schema({
     email: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     totalDeposit: {
         type: Number,

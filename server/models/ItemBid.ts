@@ -19,6 +19,9 @@ const ItemBidSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
+    lastBidder: {
+        type: String
+    },
 }, {
     timestamps: true,
     collection: 'bids'
