@@ -9,7 +9,7 @@ Feature:
 ![arch](https://github.com/calvintorsaGit/jitera_asignment/assets/42115427/7b067829-559b-4275-8c2b-c1c1eb42f295)
 
 Frontend: React, MaterialUI, tailwind, socket-client, axio
-Backend: Express, MongoDB, Socket.io
+<br> Backend: Express, MongoDB, Socket.io
 
 - Using Socket IO to update table realtime for every changes made by user
 - Login, Register, Deposit, Create Item use normal Http request
