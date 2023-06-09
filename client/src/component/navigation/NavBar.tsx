@@ -25,7 +25,7 @@ function ResponsiveAppBar() {
 
     useEffect(() => {
         setBalance(user.balance);
-        socket = socketIOClient('jiteraasignment-production.up.railway.app')
+        socket = socketIOClient('https://jiteraasignment-production.up.railway.app/')
         window.addEventListener('storage', () => {
             const user:any = JSON.parse(localStorage.getItem("user") ?? '')
             setBalance(user.balance);
