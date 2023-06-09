@@ -6,7 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import {MutableRefObject, useEffect, useRef} from "react";
+import {RefObject, useEffect, useRef} from "react";
 
 interface dialogProps {
     open: boolean,
@@ -14,26 +14,26 @@ interface dialogProps {
     onBid: (price: number) => void
 }
 
+export const handleBid = (props: dialogProps, priceRef: RefObject<any> ) => {
+    const price = priceRef.current.value;
+    props.onBid(price);
+};
+
+export const handleClose = (props: dialogProps) => {
+    props.onClose()
+};
+
 export default function FormDialog(props: dialogProps) {
     const [open, setOpen] = React.useState(false);
-    const priceRef: any = useRef();
+    const priceRef: RefObject<any> = useRef();
 
     useEffect(() => {
         setOpen(props.open);
     }, [props.open]);
 
-    const handleBid = () => {
-        const price = priceRef.current.value;
-        props.onBid(price);
-    };
-
-    const handleClose = () => {
-        props.onClose()
-    };
-
     return (
         <div>
-            <Dialog open={open} onClose={handleClose}>
+            <Dialog open={open} onClose={() => handleClose(props)}>
                 <DialogTitle>Bid Item Name</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
@@ -51,8 +51,8 @@ export default function FormDialog(props: dialogProps) {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleBid}>Bid</Button>
-                    <Button onClick={handleClose} color="error">Cancel</Button>
+                    <Button onClick={() => handleBid(props, priceRef)}>Bid</Button>
+                    <Button onClick={() =>handleClose(props)} color="error">Cancel</Button>
                 </DialogActions>
             </Dialog>
         </div>
