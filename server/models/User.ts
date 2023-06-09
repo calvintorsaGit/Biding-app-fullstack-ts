@@ -7,6 +7,7 @@ export interface IUser extends mongoose.Document {
     password: string,
     createdAt: Date,
     updatedAt: Date,
+    balance: number,
     comparePassword(password: string): any;
 }
 
