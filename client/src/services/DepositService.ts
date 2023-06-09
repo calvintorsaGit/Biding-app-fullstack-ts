@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8000/api/";
+const API_URL = `jiteraasignment-production.up.railway.app/api/`;
 
 class DepositService {
     deposit(email: string, totalDeposit: number) {
