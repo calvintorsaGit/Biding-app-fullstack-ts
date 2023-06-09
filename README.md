@@ -1,4 +1,4 @@
-# jitera_asignment
+# jitera_assignment
 
 Web deployed: https://jitera-asignment.vercel.app/
 
