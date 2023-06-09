@@ -1,5 +1,7 @@
 # jitera_asignment
 
+Web deployed: https://jitera-asignment.vercel.app/
+
 Feature:
 1. Login / Register for participate in bidding
 2. Deposit 
