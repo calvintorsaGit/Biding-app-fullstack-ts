@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, Navigate} from "react-router-dom";
 import Login from "./page/login/Login";
 import RegisterPage from "./page/register/RegisterPage";
 import Deposit from "./page/deposit/Deposit";
@@ -22,6 +22,7 @@ function App() {
                     <Route index path="/deposit" Component={Deposit}/>
                     <Route path="/createItem" Component={CreateItem}/>
                 </Route>
+                <Route path="*" element={<Navigate to="/"/>}/>
             </Routes>
         </div>
     );

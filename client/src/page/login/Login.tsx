@@ -7,38 +7,51 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import React from "react";
+import React, {useState} from "react";
 import {useNavigate} from 'react-router-dom';
 
 import AuthService from "../../services/AuthService";
+import {Alert, Snackbar} from "@mui/material";
 
 export default function Login() {
     const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState('')
+    const [showError, setShowError] = useState(false)
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const email = data.get("email") || "";
         const password = data.get("password") || "";
-        console.log(email, password);
+
         AuthService.login(email.toString(), password.toString()).then(
             () => {
                 navigate('/home');
             },
             error => {
-                const resMessage =
-                    (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
-                    error.message ||
-                    error.toString();
-                console.log(resMessage);
-
+                const resMessage = error.response.data.message;
+                setErrorMessage(resMessage);
+                setShowError(true);
             }
         );
     };
 
-    return (
+    const handleClose = () => setShowError(false);
+
+    const _renderErrorMessage = () => (
+        <Snackbar
+            open={showError}
+            autoHideDuration={2000}
+            onClose={handleClose}
+            anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+        >
+            <Alert severity="error">
+                {errorMessage}
+            </Alert>
+        </Snackbar>
+    )
+
+    const _renderLoginBox = () => (
         <Container component="main" maxWidth="sm">
             <Box
                 sx={{
@@ -94,5 +107,12 @@ export default function Login() {
                 </Box>
             </Box>
         </Container>
+    )
+
+    return (
+        <React.Fragment>
+            {_renderLoginBox()}
+            {_renderErrorMessage()}
+        </React.Fragment>
     );
 }

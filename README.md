@@ -7,8 +7,6 @@ Feature:
 3. Participate in bidding
 4. See winner of bidding in completed table 
 
-![arch](https://github.com/calvintorsaGit/jitera_asignment/assets/42115427/7b067829-559b-4275-8c2b-c1c1eb42f295)
-
 Frontend: React, MaterialUI, tailwind, socket-client, axio
 <br> Backend: Express, MongoDB, Socket.io
 
