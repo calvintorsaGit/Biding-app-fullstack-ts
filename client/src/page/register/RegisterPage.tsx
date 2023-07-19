@@ -5,12 +5,15 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import React from "react";
+import React, {useState} from "react";
 
 import AuthService from "../../services/AuthService";
 import {useNavigate} from "react-router-dom";
+import {Alert, Snackbar} from "@mui/material";
 
 export default function RegisterPage() {
+    const [errorMessage, setErrorMessage] = useState('')
+    const [showError, setShowError] = useState(false)
     const navigate = useNavigate();
 
     const handleSubmit = (event: any) => {
@@ -23,18 +26,27 @@ export default function RegisterPage() {
                 navigate('/');
             },
             error => {
-                const resMessage =
-                    (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
-                    error.message ||
-                    error.toString();
-                console.log(resMessage);
+                const resMessage = error.response.data.message;
+                setErrorMessage(resMessage);
+                setShowError(true);
 
             })
     };
 
-    return (
+    const _renderErrorMessage = () => (
+        <Snackbar
+            open={showError}
+            autoHideDuration={2000}
+            onClose={handleClose}
+            anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+        >
+            <Alert severity="error">
+                {errorMessage}
+            </Alert>
+        </Snackbar>
+    )
+
+    const _renderRegisterBox = () => (
         <Container component="main" maxWidth="sm">
             <Box
                 sx={{
@@ -92,5 +104,11 @@ export default function RegisterPage() {
                 </Box>
             </Box>
         </Container>
+    )
+
+    return (<React.Fragment>
+            {_renderRegisterBox()}
+            {_renderErrorMessage()}
+        </React.Fragment>
     );
 }
